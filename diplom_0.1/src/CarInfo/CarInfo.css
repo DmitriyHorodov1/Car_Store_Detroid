@@ -1,0 +1,53 @@
+.car_info{
+    width: 77em;
+    height: 30em;
+    margin-left: 1%;
+    margin-top: 5%;
+    display: grid;
+    margin-bottom: 45%;
+    
+}
+.car_block{
+    width: 77em;
+    height: 30em;
+    margin-top: 0%;
+   
+   
+}
+.car_block2{
+    width: 77em;
+    height: 40em;
+    margin-top: 2%;
+    overflow: auto; 
+    padding: 20px;
+    
+   
+}
+.contacs{
+    width: 23em;
+    height: 30em;
+    margin-left: 1%;
+    margin-top: 11.6%;
+    
+
+}
+/* Target the scrollbar */
+::-webkit-scrollbar {
+    width: 10px; /* set the width of the scrollbar */
+    
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* set the background color of the scrollbar track */
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; /* set the color of the scrollbar handle */
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* set the color of the scrollbar handle on hover */
+  }
