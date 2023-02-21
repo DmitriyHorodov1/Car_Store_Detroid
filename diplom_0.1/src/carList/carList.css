@@ -3,9 +3,18 @@
     margin-left: 18%;
     margin-bottom: 7%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 20em);
    /*grid-auto-rows: 40%;*/
     column-gap: 1em;
     row-gap: 1em;
+    position: relative;
+    z-index: 1;
+    width: 100%;
   
+}
+.filterPos{
+    position: fixed;
+    z-index: 2;
+    margin-left: 72%;
+   
 }

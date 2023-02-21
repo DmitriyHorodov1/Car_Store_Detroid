@@ -29,8 +29,8 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import CarInfo from './CarInfo/CarInfo';
-
-
+import Button from '@mui/material/Button';
+import LogInPage from './Users/LogInPage/LoginPage';
 
 
 
@@ -160,7 +160,7 @@ export default function App() {
     return (
         <ThemeProvider theme={themeOne}>
              <body>
-              <Box sx={{ display: 'flex' }} >
+              <Box sx={{  }} >
             <CssBaseline />
             <AppBar position="fixed" open={open}>
                 <Toolbar>
@@ -187,6 +187,8 @@ export default function App() {
                         />
                     </Search>
 
+                    
+                    <Link to="/log-in" style={{marginLeft:'60%'}} ><Button variant="contained" to="/log-in" style={{ backgroundColor:'#415A77'}} >My Account</Button></Link>
                 </Toolbar>
             </AppBar>
 
@@ -197,6 +199,8 @@ export default function App() {
                 <Route path="/update-car/:id" element={<EditCar/>} />
                 <Route path = "/car-list"  element={<CarList/>}/>
                 <Route path = "/car-info/:id" element={<CarInfo/>}/>
+                <Route path = "/log-in" element={<LogInPage/>}/>
+                
             </Routes>
 
             <Drawer

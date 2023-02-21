@@ -248,12 +248,12 @@ const CarList = () => {
   /////////////////////////////////////////////////////////////////////////
   return (
     //table  and filter
-    <><div className="table-spacing  ">
+    <><div className="table-spacing" >
       {DataTable()} 
-      </div>
       
+    
    
-<div className='margin'>
+<div className="filterPos" >
        {[ 'right'].map((anchor) => (
         <React.Fragment key={anchor}>
          
@@ -272,7 +272,7 @@ const CarList = () => {
         </React.Fragment>
       ))}
     </div>
-
+</div>
 
     </>
   );

@@ -10,14 +10,11 @@
   
   
   .cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 3rem;
-    margin: 12rem 5vw;
     margin-top: 17%;
-    margin-left: 24%;
-    padding: 0;
-    list-style-type: none;
+    margin-left: 17%;
+    margin-bottom: 7%;
+    display: grid;
+    grid-template-columns: repeat(3, 30em);
     
   }
   
