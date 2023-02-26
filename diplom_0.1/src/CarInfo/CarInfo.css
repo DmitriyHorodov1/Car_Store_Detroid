@@ -1,7 +1,7 @@
 .car_info{
     width: 77em;
     height: 30em;
-    margin-left: 1%;
+    margin-left: 25%;
     margin-top: 5%;
     display: grid;
     margin-bottom: 45%;
@@ -11,13 +11,14 @@
     width: 77em;
     height: 30em;
     margin-top: 0%;
+    margin-left: 15%;
    
    
 }
 .car_block2{
     width: 77em;
     height: 40em;
-    margin-top: 2%;
+    margin-top: 40%;
     overflow: auto; 
     padding: 20px;
     

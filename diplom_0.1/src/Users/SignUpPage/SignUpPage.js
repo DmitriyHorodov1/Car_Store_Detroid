@@ -42,17 +42,19 @@ export default function SignUpPage() {
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        <Box className="background-image-box">
         <Box
           sx={{
             marginTop: 25,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5', // set background color here
-    padding: '2rem',
-    borderRadius: '0.5rem',
-    boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.15)', // add box shadow for depth
-            
+      marginLeft:'40%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      backgroundColor: '#f5f5f5',
+      padding: '2rem',
+      borderRadius: '0.5rem',
+      boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.15)',
+      maxWidth: '450px', // added a maxWidth property to limit the width of the inner box
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -128,6 +130,7 @@ export default function SignUpPage() {
               </Grid>
             </Grid>
           </Box>
+        </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>

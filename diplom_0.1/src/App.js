@@ -32,7 +32,7 @@ import CarInfo from './CarInfo/CarInfo';
 import Button from '@mui/material/Button';
 import LogInPage from './Users/LogInPage/LoginPage';
 import SignUpPage from './Users/SignUpPage/SignUpPage';
-import PasswordRecoveryPage from './Users/PasswordRecoveryPage/PasswordRecoveryPage';
+import PasswordRecoveryPage from './Users/PassWord/PasswordRecoveryPage';
 
 const themeOne = createTheme({
     palette: {
@@ -248,7 +248,7 @@ export default function App() {
 
         </Box>
 
-        <footer className="site-footer ">
+        <footer className="site-footer " style={{ zIndex: 3}}>
       
       <div className="container">
         <div className="row">

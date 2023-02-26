@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import './PasswordRecoveryPage.css'
 
 function PasswordRecoveryPage() {
   const handleSubmit = (event) => {
@@ -28,18 +29,22 @@ function PasswordRecoveryPage() {
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 35,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            backgroundColor: '#f5f5f5',
-            padding: '2rem',
-            borderRadius: '0.5rem',
-            boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.15)',
-          }}
-        >
+        <Box className="background-image-box">
+  <Box
+    sx={{
+      marginTop: 35,
+      marginLeft:'40%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      backgroundColor: '#f5f5f5',
+      padding: '2rem',
+      borderRadius: '0.5rem',
+      boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.15)',
+      maxWidth: '400px', // added a maxWidth property to limit the width of the inner box
+      
+    }}
+  >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -75,6 +80,7 @@ function PasswordRecoveryPage() {
               </Grid>
             </Grid>
           </Box>
+        </Box>
         </Box>
       </Container>
     </ThemeProvider>
