@@ -48,7 +48,7 @@ export default function LogInPage() {
           sm={9}
           md={8}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundImage: 'url(https://source.unsplash.com/random/?sportcar)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -106,13 +106,13 @@ export default function LogInPage() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="/pass-rec" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link href= "/sign-up" variant="body2">
+                    "Don't have an account? Sign Up"
                   </Link>
                 </Grid>
               </Grid>
