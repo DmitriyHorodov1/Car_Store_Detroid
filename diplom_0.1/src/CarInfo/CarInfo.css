@@ -1,19 +1,17 @@
-.car_info{
-    width: 77em;
-    height: 30em;
-    margin-left: 25%;
-    margin-top: 5%;
-    display: grid;
-    margin-bottom: 45%;
-    
+
+.car_block {
+  width: 77em;
+  height: 30em;
+  margin-left: 24em;
+  display: inline-block;
 }
-.car_block{
-    width: 77em;
-    height: 30em;
-    margin-top: 0%;
-    margin-left: 15%;
-   
-   
+
+.contacs {
+  width: 23em;
+  height: 30em;
+  margin-left: 1%;
+  margin-top: 7%;
+  display: inline-block;
 }
 .car_block2{
     width: 77em;
@@ -21,17 +19,11 @@
     margin-top: 40%;
     overflow: auto; 
     padding: 20px;
+    margin-bottom: 8%;
     
    
 }
-.contacs{
-    width: 23em;
-    height: 30em;
-    margin-left: 1%;
-    margin-top: 11.6%;
-    
 
-}
 /* Target the scrollbar */
 ::-webkit-scrollbar {
     width: 10px; /* set the width of the scrollbar */

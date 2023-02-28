@@ -33,6 +33,7 @@ import Button from '@mui/material/Button';
 import LogInPage from './Users/LogInPage/LoginPage';
 import SignUpPage from './Users/SignUpPage/SignUpPage';
 import PasswordRecoveryPage from './Users/PassWord/PasswordRecoveryPage';
+import ImageUploader from './Users/ImageUploader';
 
 const themeOne = createTheme({
     palette: {
@@ -202,6 +203,7 @@ export default function App() {
                 <Route path = "/log-in" element={<LogInPage/>}/>
                 <Route path = "/sign-up" element={<SignUpPage/>}/>
                 <Route path = "/pass-rec" element={<PasswordRecoveryPage/>}/>
+                <Route path="/test" element={<ImageUploader/>} />
                 
             </Routes>
 

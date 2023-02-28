@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Typography from '@mui/material/Typography';
@@ -25,18 +25,46 @@ const validationSchema = Yup.object().shape({
     .min(0, 'Price must be greater than or equal to 0'),
   description: Yup.string()
     .required("Required"),
+    base64: Yup.string()
+    .notOneOf(["Nope", "No"], "Invalid base64 value")
+    .required("Required")
 
 
 });
-console.log(props);
 
+
+
+console.log(props);
+// define the function that converts the file to base64
+const [image, setImage] = useState(null);
+  const [base64String, setBase64String] = useState(null);
+
+  const handleFileInputChange = async (event) => {
+    const file = event.target.files[0];
+    const base64 = await convertToBase64(file);
+    setBase64String(base64);
+    setImage(URL.createObjectURL(file));
+   
+  };
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      
+    });
+  };
+  
 
   return (
     <>
            
     <div className="form-wrapper spasing-form ">
 
-      <Formik {...props} validationSchema={validationSchema} >
+      <Formik {...props} validationSchema={validationSchema}  >
+        
         <Form  >
           <FormGroup>
             <label htmlFor="exampleFormControlTextarea1" > 
@@ -65,6 +93,44 @@ console.log(props);
               style={{fontSize:'1.5em'}}
             />
           </FormGroup>
+          
+          <FormGroup>
+            <label htmlFor="exampleFormControlTextarea1" > 
+            <Typography variant="h4" gutterBottom>Photo</Typography>
+            </label>
+            <Field  type="file" name="photo" 
+                className="form-control form-control-lg spasing-field "  accept="image/jpeg" onChange={(event) => handleFileInputChange(event)}
+                 />
+            <ErrorMessage
+              name="photo"
+              className="d-block invalid-feedback"
+              component="span"
+              style={{fontSize:'1.5em'}}
+            />
+          </FormGroup>
+
+
+
+          <FormGroup>
+          <label htmlFor="exampleFormControlTextarea1" > 
+            <Typography variant="h4" gutterBottom>Do you want save photo ?</Typography>
+            </label>
+            <Field as="select"  name="base64" 
+                className="form-control form-control-lg spasing-field "  >
+                  <option value = "Nope"> Pick your answer</option>
+                   <option value={base64String}>Yes</option>
+                   <option value="No">No</option>
+                  </Field>
+                  <ErrorMessage
+              name="base64"
+              className="d-block invalid-feedback"
+              component="span"
+              style={{fontSize:'1.5em'}}
+            />
+          </FormGroup>
+
+
+          
               <FormGroup>
           <label htmlFor="exampleFormControlTextarea1" ><Typography variant="h4" gutterBottom>
         Year
@@ -78,7 +144,7 @@ console.log(props);
             style={{fontSize:'1.5em'}}
           />
         </FormGroup>
-
+        
                 <FormGroup>
           <label htmlFor="exampleFormControlTextarea1" ><Typography variant="h4" gutterBottom>
         Mileage

@@ -17,6 +17,9 @@ let carSchema = new Schema({
   condition:{
     type: String
   },
+  base64:{
+    type: String
+  },
   price:{
     type: Number
   },

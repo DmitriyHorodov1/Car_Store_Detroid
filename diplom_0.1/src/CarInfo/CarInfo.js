@@ -14,39 +14,60 @@ const CarInfo = (props) => {
     mileage: "",
     condition:"",
     price:"",
-    description:""
+    description:"",
+    base64:""
   });
 
-    const {id} = useParams(); 
-    useEffect(() => {
-      axios
-        .get(
-          "http://localhost:4000/cars/car-info/" + id
-        )
-        .then((res) => {
-          const { BrandName, ModelName, year, mileage, condition, price, description  } = res.data;
-          setFormValues({ BrandName, ModelName, year, mileage, condition, price, description  });
+  const {id} = useParams(); 
+
+  useEffect(() => {
+    axios
+      .get(
+        "http://localhost:4000/cars/car-info/" + id
+      )
+      .then((res) => {
+        const { BrandName, ModelName, year, mileage, condition, price, description,base64 } = res.data;
+        setFormValues({ BrandName, ModelName, year, mileage, condition, price, description,base64 });
+      })
+      .catch((err) =>  console.log(err));
+  }, []);
+
+  const convertToImage = (base64String) => {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.src = base64String;
+      image.onload = () => resolve(image);
+      image.onerror = (error) => reject(error);
+    });
+  };
+
+  useEffect(() => {
+    if (formValues.base64) {
+      convertToImage(formValues.base64)
+        .then((image) => {
+          setFormValues((prevValues) => ({ ...prevValues, image }));
         })
-        .catch((err) =>  console.log(err));
-    }, []);
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [formValues.base64]);
+
   
 
   return (
     <>
-    
-    <div className='contacs' style={{borderRadius:'2em', backgroundColor:'#415A77'}}>
-  <div className='car_info' style={{borderRadius:'2em'}}>
-    <Typography variant="h2" gutterBottom style={{textAlign: "center", marginBottom:'5%' }}>{formValues.BrandName}</Typography>
-    <div  className='car_block' style={{borderRadius:'2em', backgroundColor:'#415A77', zIndex: 1}}>
-      <div  className='car_block2' style={{borderRadius:'2em', backgroundColor:'#415A77', zIndex: 0}}>
-        <Typography variant="h3" gutterBottom style={{  textAlign: "center", marginTop:"2%"}} >{formValues.BrandName} {formValues.ModelName}</Typography>  
-        <Typography variant="h4" gutterBottom style={{ textAlign: "center" }} > Description</Typography>
-        <Typography variant="h5" gutterBottom style={{ textAlign: "justify" }} > {formValues.description}</Typography>
-        <Typography variant="h5" gutterBottom style={{ textAlign: "justify" }} > Condition : {formValues.condition}  Year : {formValues.year} Mileage : {formValues.mileage}  </Typography>
+      <div className='contacs' style={{borderRadius:'2em', backgroundColor:'#415A77'}}>
+        <div  className='car_block' style={{borderRadius:'2em', backgroundColor:'#415A77', zIndex: 1, backgroundImage: `url(${formValues.image && formValues.image.src})`,backgroundSize: 'cover',backgroundPosition: 'center',backgroundRepeat: 'no-repeat' }}>
+        
+          <div  className='car_block2' style={{borderRadius:'2em', backgroundColor:'#415A77', zIndex: 0}}>
+            <Typography variant="h3" gutterBottom style={{  textAlign: "center", marginTop:"2%"}} >{formValues.BrandName} {formValues.ModelName}</Typography>  
+            <Typography variant="h4" gutterBottom style={{ textAlign: "center" }} > Description</Typography>
+            <Typography variant="h5" gutterBottom style={{ textAlign: "justify" }} > {formValues.description}</Typography>
+            <Typography variant="h5" gutterBottom style={{ textAlign: "justify" }} > Condition : {formValues.condition}  Year : {formValues.year} Mileage : {formValues.mileage}  </Typography>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
     </>
   );
 };
