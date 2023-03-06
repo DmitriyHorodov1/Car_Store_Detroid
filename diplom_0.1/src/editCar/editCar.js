@@ -23,21 +23,7 @@ const EditCar = (props) => {
   let navigate = useNavigate();
 
 
-  /*//onSubmit handler
-  const onSubmit = (carObject) => {
-    axios
-      .put(
-        "http://localhost:4000/cars/update-car/" + id,carObject
-      )
-      .then((res) => {
-        if (res.status === 200) {
-          alert("Car successfully updated");
-          navigate("/car-list");
-        } else Promise.reject();
-      })
-      .catch((err) => console.log( err   ));
-  };*/
-
+  
 
   // onSubmit handler
   const onSubmit = (carObject) => {

@@ -26,11 +26,25 @@ const CarInfo = (props) => {
         "http://localhost:4000/cars/car-info/" + id
       )
       .then((res) => {
-        const { BrandName, ModelName, year, mileage, condition, price, description,base64 } = res.data;
-        setFormValues({ BrandName, ModelName, year, mileage, condition, price, description,base64 });
+        const { BrandName, ModelName, year, mileage, condition, price, description, base64 } = res.data;
+        setFormValues((prevValues) => ({
+          ...prevValues,
+          BrandName,
+          ModelName,
+          year,
+          mileage,
+          condition,
+          price,
+          description,
+          base64,
+          image: null,
+        }));
+        convertToImage(base64).then((image) => {
+          setFormValues((prevValues) => ({ ...prevValues, image }));
+        });
       })
-      .catch((err) =>  console.log(err));
-  }, []);
+      .catch((err) => console.log(err));
+  }, [id]);
 
   const convertToImage = (base64String) => {
     return new Promise((resolve, reject) => {
@@ -41,17 +55,7 @@ const CarInfo = (props) => {
     });
   };
 
-  useEffect(() => {
-    if (formValues.base64) {
-      convertToImage(formValues.base64)
-        .then((image) => {
-          setFormValues((prevValues) => ({ ...prevValues, image }));
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [formValues.base64]);
+  
 
   
 

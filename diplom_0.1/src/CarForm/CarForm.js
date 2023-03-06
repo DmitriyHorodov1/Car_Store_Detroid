@@ -99,7 +99,7 @@ const [image, setImage] = useState(null);
             <Typography variant="h4" gutterBottom>Photo</Typography>
             </label>
             <Field  type="file" name="photo" 
-                className="form-control form-control-lg spasing-field "  accept="image/jpeg" onChange={(event) => handleFileInputChange(event)}
+                className="form-control form-control-lg spasing-field "  accept="image/jpg" onChange={(event) => handleFileInputChange(event)}
                  />
             <ErrorMessage
               name="photo"
