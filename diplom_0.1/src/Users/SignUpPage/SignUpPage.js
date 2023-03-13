@@ -1,139 +1,120 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import React, { useState, useEffect } from "react";
+import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { FormGroup, FormControl, Button } from "react-bootstrap";
+import { padding } from "@mui/system";
+import './SignUpPage.css'
 
-function Copyright(props) {
+const SignUpPage = (props) => {
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
+    .required("Required"),
+  lastName: Yup.string()
+  .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
+  .required("Required"),
+  email: Yup.string()
+  .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
+  .required("Required"),
+  password: Yup.string()
+  .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
+  .required("Required"),
+
+
+
+});
+
+
+
+console.log(props);
+
+
+  
+
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+    <>
+        <div className="background-image-box">
+    <div className=" formBack  " style={{ 
+      backgroundColor:'#E0E1DD',
+      width:"60em",
+      padding:"5em",
+      
+
+}}>
+
+      <Formik {...props} validationSchema={validationSchema}  >
+        
+        <Form  >
+          <FormGroup>
+            <label htmlFor="exampleFormControlTextarea1" > 
+            <Typography variant="h4" gutterBottom>First Name</Typography>
+            </label>
+            <Field name="firstName" type="text" 
+                className="form-control form-control-lg  " />
+                
+            <ErrorMessage
+              name="firstName"
+              className="d-block invalid-feedback"
+              component="span"
+              style={{fontSize:'1.5em'}}
+            />
+          </FormGroup>
+          <FormGroup>
+            <label htmlFor="exampleFormControlTextarea1" > 
+            <Typography variant="h4" gutterBottom>Last Name</Typography>
+            </label>
+            <Field name="lastName" type="text" 
+                className="form-control form-control-lg  " />
+            <ErrorMessage
+              name="lastName"
+              className="d-block invalid-feedback"
+              component="span"
+              style={{fontSize:'1.5em'}}
+            />
+          </FormGroup>
+          
+          <FormGroup>
+            <label htmlFor="exampleFormControlTextarea1" > 
+            <Typography variant="h4" gutterBottom>email</Typography>
+            </label>
+            <Field name="email" type="text" 
+                className="form-control form-control-lg  " />
+            <ErrorMessage
+              name="email"
+              className="d-block invalid-feedback"
+              component="span"
+              style={{fontSize:'1.5em'}}
+            />
+          </FormGroup>
+        
+          <FormGroup>
+            <label htmlFor="exampleFormControlTextarea1" > 
+            <Typography variant="h4" gutterBottom>password</Typography>
+            </label>
+            <Field name="password" type="password" 
+                className="form-control form-control-lg  " />
+            <ErrorMessage
+              name="password"
+              className="d-block invalid-feedback"
+              component="span"
+              style={{fontSize:'1.5em'}}
+            />
+          </FormGroup>
+  
+        <Button variant="danger" size="lg" 
+            block="block" type="submit">
+            {props.children}
+            
+          </Button>
+        </Form>
+      </Formik>
+    </div>
+    </div>   
+    </>
+    
   );
-}
+  
+};
 
-const theme = createTheme();
-
-export default function SignUpPage() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
-  return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box className="background-image-box">
-        <Box
-          sx={{
-            marginTop: 25,
-      marginLeft:'40%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      backgroundColor: '#f5f5f5',
-      padding: '2rem',
-      borderRadius: '0.5rem',
-      boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.15)',
-      maxWidth: '450px', // added a maxWidth property to limit the width of the inner box
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/log-in" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        </Box>
-        <Copyright sx={{ mt: 5 }} />
-      </Container>
-    </ThemeProvider>
-  );
-}
+export default SignUpPage;

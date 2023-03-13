@@ -31,9 +31,8 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import CarInfo from './CarInfo/CarInfo';
 import Button from '@mui/material/Button';
 import LogInPage from './Users/LogInPage/LoginPage';
-import SignUpPage from './Users/SignUpPage/SignUpPage';
+import CreateUser from './Users/CreateUserPage';
 import PasswordRecoveryPage from './Users/PassWord/PasswordRecoveryPage';
-import ImageUploader from './Users/ImageUploader';
 
 const themeOne = createTheme({
     palette: {
@@ -201,9 +200,9 @@ export default function App() {
                 <Route path = "/car-list"  element={<CarList/>}/>
                 <Route path = "/car-info/:id" element={<CarInfo/>}/>
                 <Route path = "/log-in" element={<LogInPage/>}/>
-                <Route path = "/sign-up" element={<SignUpPage/>}/>
+                <Route path = "/sign-up" element={<CreateUser/>}/>
                 <Route path = "/pass-rec" element={<PasswordRecoveryPage/>}/>
-                <Route path="/test" element={<ImageUploader/>} />
+                
                 
             </Routes>
 

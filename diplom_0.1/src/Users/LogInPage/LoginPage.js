@@ -28,6 +28,8 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+
+
 export default function LogInPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,6 +39,8 @@ export default function LogInPage() {
       password: data.get('password'),
     });
   };
+
+  
 
   return (
     <ThemeProvider theme={theme}>

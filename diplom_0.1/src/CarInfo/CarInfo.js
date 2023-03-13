@@ -15,7 +15,7 @@ const CarInfo = (props) => {
     condition:"",
     price:"",
     description:"",
-    base64:""
+    base64:[0]
   });
 
   const {id} = useParams(); 

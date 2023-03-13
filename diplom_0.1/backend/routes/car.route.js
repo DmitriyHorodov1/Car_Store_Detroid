@@ -4,6 +4,7 @@ let mongoose = require("mongoose"),
   
 // Car Model
 let carSchema = require("../models/Car");
+let userSchema = require("../models/User")
   
 // CREATE car
 router.post("/create-car", (req, res, next) => {
@@ -15,6 +16,17 @@ router.post("/create-car", (req, res, next) => {
       res.json(data);
     }
   });
+});
+//Create User 
+router.post("/sign-up", (req, res, next) => {
+  userSchema.create(req.body, (error, data) => {
+  if (error) {
+    return next(error);
+  } else {
+    console.log(data);
+    res.json(data);
+  }
+});
 });
   
 // READ Cars
