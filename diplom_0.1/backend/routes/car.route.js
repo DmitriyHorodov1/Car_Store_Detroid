@@ -28,6 +28,16 @@ router.post("/sign-up", (req, res, next) => {
   }
 });
 });
+// Read Users
+router.get("/users", (req, res) => {
+  userSchema.find((error, data) => {
+  if (error) {
+    return next(error);
+  } else {
+    res.json(data);
+  }
+});
+});
   
 // READ Cars
 router.get("/", (req, res) => {
