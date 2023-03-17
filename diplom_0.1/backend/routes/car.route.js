@@ -28,6 +28,71 @@ router.post("/sign-up", (req, res, next) => {
   }
 });
 });
+
+//LogIn
+router.route("/log-in")
+  .get((req, res, next) => {
+    const { email } = req.query;
+    userSchema.findOne(
+      { email },
+      (error, data) => {
+        if (error) {
+          return next(error);
+        } else {
+          res.json(data);
+        }
+      }
+    );
+  })
+  .put((req, res, next) => {
+    const { email } = req.query;
+    userSchema.findOneAndUpdate(
+      { email },
+      { isAuthenticated: true },
+      { new: true },
+      (error, data) => {
+        if (error) {
+          return next(error);
+        } else {
+          res.json(data);
+          
+        }
+      }
+    );
+  });
+//Log out
+router.route('/log-out')
+  .get((req, res, next) => {
+    const { email } = req.query;
+    userSchema.findOne({ email }, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.json(data);
+      }
+    });
+  })
+  .put(async (req, res, next) => {
+    const { email } = req.query;
+    try {
+      const user = await userSchema.findOne({ email });
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      if (user.isAuthenticated) {
+        user.isAuthenticated = false;
+        await user.save();
+        res.json({ message: 'Logged out successfully' });
+      } else {
+        res.status(400).json({ message: 'User is already logged out' });
+      }
+    } catch (error) {
+      return next(error);
+    }
+  });
+
+
+
 // Read Users
 router.get("/users", (req, res) => {
   userSchema.find((error, data) => {

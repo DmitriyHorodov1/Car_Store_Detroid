@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,useState, useEffect} from 'react';
 import "./App.css"
 import {Routes, Route , Link, useParams} from "react-router-dom";
 import HomePage from "./HomePage/HomePage";
@@ -30,9 +30,11 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import CarInfo from './CarInfo/CarInfo';
 import Button from '@mui/material/Button';
-import LogInPage from './Users/LogInPage/LoginPage';
-import CreateUser from './Users/CreateUserPage';
+import LogInUser from './Users/LogInPage/LogInUser';
+import CreateUser from './Users/SignUpPage/CreateUserPage';
 import PasswordRecoveryPage from './Users/PassWord/PasswordRecoveryPage';
+import axios from 'axios';
+
 
 const themeOne = createTheme({
     palette: {
@@ -148,6 +150,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function App() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [email, setEmail] = useState('');
+
+    useEffect(() => {
+        const loggedInEmail = localStorage.getItem('loggedInEmail');
+        if (loggedInEmail) {
+          setEmail(loggedInEmail);
+        }
+      }, []);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -187,7 +197,7 @@ export default function App() {
                         />
                     </Search>
 
-                    
+                    {email ? <p>Logged in as: {email}</p> : <p>You are not logged in</p>}
                     <Link to="/log-in" style={{marginLeft:'60%'}} ><Button variant="contained" to="/log-in" style={{ backgroundColor:'#415A77'}} >My Account</Button></Link>
                 </Toolbar>
             </AppBar>
@@ -199,7 +209,7 @@ export default function App() {
                 <Route path="/update-car/:id" element={<EditCar/>} />
                 <Route path = "/car-list"  element={<CarList/>}/>
                 <Route path = "/car-info/:id" element={<CarInfo/>}/>
-                <Route path = "/log-in" element={<LogInPage/>}/>
+                <Route path = "/log-in" element={<LogInUser/>}/>
                 <Route path = "/sign-up" element={<CreateUser/>}/>
                 <Route path = "/pass-rec" element={<PasswordRecoveryPage/>}/>
                 

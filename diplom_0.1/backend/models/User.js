@@ -13,7 +13,8 @@ let userSchema = new Schema({
   },
   password:{
     type: String
-  }
+  },
+  isAuthenticated: { type: Boolean, default: false },
 }, {
     collection: 'Userlist'
   })

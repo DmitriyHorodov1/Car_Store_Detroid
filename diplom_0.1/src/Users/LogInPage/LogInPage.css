@@ -1,0 +1,20 @@
+.background-image-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('https://source.unsplash.com/random/1920x1080/?sportcar');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .formBack{
+    
+      position: absolute; 
+      top: 50%; 
+      left: 50%; 
+      transform: translate(-50%, -50%); 
+    
+    
+  }
+  

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import SignUpPage from "./SignUpPage/SignUpPage";
+import SignUpPage from "./SignUpPage";
 import { useNavigate } from "react-router-dom";
 
 // CreateCar Component
@@ -28,7 +28,7 @@ const CreateUser = () => {
         .then(res => {
           if (res.status === 200){
             alert('User successfully created')
-            navigate("/");
+            navigate("/log-in");
           } else {
             Promise.reject()
           }
