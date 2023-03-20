@@ -22,6 +22,8 @@ const LogInUser = () => {
                 // Save email to LocalStorage
                 localStorage.setItem('loggedInEmail', email);
                 navigate("/");
+                window.location.reload(); 
+               
               })
               .catch(error => {
                 console.log(error);

@@ -48,57 +48,10 @@ const themeOne = createTheme({
       },
   });
 
-const buttonsNav = [
-   <Link to="/" ><button key="home" className='a2'>Home</button></Link>,
-    <Link to="/car-list"><button key="car-list" className='a2'>CarList</button></Link>,
-      <Link to="/about" ><button key="about" className='a2'>About</button></Link>,
-      <Link to="/create-car" ><button key="create-car" className='a2'>CretePage</button></Link>
-];
 
 
 
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: '100%',
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto',
 
-    },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
-    },
-}));
 
 const drawerWidth = 240;
 
@@ -166,6 +119,38 @@ export default function App() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+    
+    const onSubmit = async () => {
+        
+        try {
+          const response = await axios.get(`http://localhost:4000/cars/log-out?email=${email}`);
+          const user = response.data;
+          if (user) {
+            if (user.isAuthenticated) {
+              axios.put(`http://localhost:4000/cars/log-out?email=${email}`, { isAuthenticated: false })
+                .then(() => {
+                  alert('Logout successful');
+                  localStorage.removeItem('loggedInEmail');
+                  window.location.reload(); 
+                })
+                .catch(error => {
+                  console.log(error);
+                  alert('Failed to log out');
+                });
+            } else {
+              alert('User is already logged out');
+            }
+          } else {
+            alert('Email not registered');
+            localStorage.removeItem('loggedInEmail');
+            window.location.reload(); 
+          }
+        } catch (error) {
+          console.log(error);
+          alert('Failed to log out');
+        }
+      };
+    
 
     return (
         <ThemeProvider theme={themeOne}>
@@ -187,18 +172,18 @@ export default function App() {
                        Detroit Car Store
                     </Typography>
 
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </Search>
+                    
 
-                    {email ? <p>Logged in as: {email}</p> : <p>You are not logged in</p>}
-                    <Link to="/log-in" style={{marginLeft:'60%'}} ><Button variant="contained" to="/log-in" style={{ backgroundColor:'#415A77'}} >My Account</Button></Link>
+                    {email ? <p style={{marginLeft:'5%'}}>Logged in as: {email}</p> : <p   style={{marginLeft:'5%'}}>You are not logged in</p>}
+                   {email &&(<Button variant="contained" style={{ backgroundColor:'#415A77', marginLeft:'50%' }} onClick={onSubmit}>Logout</Button>)} 
+                    {!email && (
+    <Link to="/log-in" style={{marginLeft:'50%'}}>
+        <Button variant="contained" to="/log-in" style={{ backgroundColor:'#415A77' }}>
+            Sign-in/ Sign-Up
+        </Button>
+       
+    </Link>
+)}
                 </Toolbar>
             </AppBar>
 
@@ -247,7 +232,11 @@ export default function App() {
                                 aria-label="vertical outlined button group"
                               
                             >
-                                {buttonsNav}
+                                <Link to="/" ><button key="home" className='a2'>Home</button></Link>,
+                                <Link to="/car-list"><button key="car-list" className='a2'>CarList</button></Link>,
+                                <Link to="/about" ><button key="about" className='a2'>About</button></Link>,
+                              
+                                {email && (  <Link to="/create-car" ><button key="create-car" className='a2'>CretePage</button></Link>)}
                             </ButtonGroup>
 
                         </ListItem>
