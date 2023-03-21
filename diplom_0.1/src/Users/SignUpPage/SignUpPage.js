@@ -10,21 +10,23 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 
 const SignUpPage = (props) => {
-const validationSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
-    .required("Required"),
-  lastName: Yup.string()
-  .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
-  .required("Required"),
-  email: Yup.string()
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
+      .required("Required"),
+    lastName: Yup.string()
+      .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
+      .required("Required"),
+    email: Yup.string()
+      .required("Required"),
+    phone: Yup.string()
+      .matches(/^\d{10}$/, "Invalid phone number")
+      .required("Required"),
+    password: Yup.string()
+      .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
+      .required("Required")
+  });
   
-  .required("Required"),
-  password: Yup.string()
-  .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
-  .required("Required"),
-
-});
 
 
 console.log(props);
@@ -74,6 +76,27 @@ console.log(props);
                     name="lastName"
                     type="text"
                     value={values.lastName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                  />
+                  <ErrorMessage
+                    name="lastName"
+                    className="d-block invalid-feedback"
+                    component="span"
+                    style={{ fontSize: '1.2em' }}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  
+                  <TextField
+                  label="Phone"
+                    id="phone"
+                    name="phone"
+                    type="text"
+                    value={values.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     variant="outlined"

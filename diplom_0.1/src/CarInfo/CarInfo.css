@@ -1,17 +1,19 @@
 
 .car_block {
+  margin-top: 7%;
   width: 77em;
   height: 30em;
   margin-left: 24em;
   display: inline-block;
+  position: relative;
 }
 
 .contacs {
   width: 23em;
   height: 30em;
-  margin-left: 1%;
-  margin-top: 7%;
-  display: inline-block;
+  margin-left: 78em;
+  position: absolute;
+  overflow: auto; 
 }
 .car_block2{
     width: 77em;
@@ -20,7 +22,7 @@
     overflow: auto; 
     padding: 20px;
     margin-bottom: 8%;
-    
+    position: relative;
    
 }
 

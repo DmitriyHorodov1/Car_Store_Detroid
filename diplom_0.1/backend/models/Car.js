@@ -26,11 +26,9 @@ let carSchema = new Schema({
   description:{
     type: String
   },
-  image:
-    {
-        data: Buffer,
-        contentType: String
-    }
+  owner:{
+    type: String
+  }
 }, {
     collection: 'Carlist'
   })

@@ -103,6 +103,23 @@ router.get("/users", (req, res) => {
   }
 });
 });
+
+//find user by email
+router.route("/user-email")
+  .get((req, res, next) => {
+    const { email } = req.query;
+    userSchema.findOne(
+      { email },
+      (error, data) => {
+        if (error) {
+          return next(error);
+        } else {
+          res.json(data);
+        }
+      }
+    );
+  })
+
   
 // READ Cars
 router.get("/", (req, res) => {

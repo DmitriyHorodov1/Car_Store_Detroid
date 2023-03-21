@@ -15,8 +15,18 @@ const CarInfo = (props) => {
     condition:"",
     price:"",
     description:"",
-    base64:[0]
+    base64:[0],
+    owner:""
   });
+  const [users, setUsers] = useState({
+    firstName:"",
+    lastName:"",
+    email:"",
+    phone:"",
+   
+  });
+
+ 
 
   const {id} = useParams(); 
 
@@ -26,7 +36,7 @@ const CarInfo = (props) => {
         "http://localhost:4000/cars/car-info/" + id
       )
       .then((res) => {
-        const { BrandName, ModelName, year, mileage, condition, price, description, base64 } = res.data;
+        const { BrandName, ModelName, year, mileage, condition, price, description, base64,owner } = res.data;
         setFormValues((prevValues) => ({
           ...prevValues,
           BrandName,
@@ -38,6 +48,7 @@ const CarInfo = (props) => {
           description,
           base64,
           image: null,
+          owner
         }));
         convertToImage(base64).then((image) => {
           setFormValues((prevValues) => ({ ...prevValues, image }));
@@ -45,6 +56,26 @@ const CarInfo = (props) => {
       })
       .catch((err) => console.log(err));
   }, [id]);
+
+
+  useEffect(() => {
+   axios.get(
+    `http://localhost:4000/cars/user-email?email=${formValues.owner}`
+   )
+   .then((res) =>{
+    const {firstName, lastName, phone, email} = res.data;
+    setUsers((values)=>({
+      ...values,
+      firstName,
+      lastName,
+      phone,
+      email
+    }));
+   })
+   .catch((err) => console.log(err));
+  });
+
+
 
   const convertToImage = (base64String) => {
     return new Promise((resolve, reject) => {
@@ -55,23 +86,36 @@ const CarInfo = (props) => {
     });
   };
 
-  
-
-  
+ 
 
   return (
     <>
-      <div className='contacs' style={{borderRadius:'2em', backgroundColor:'#415A77'}}>
-        <div  className='car_block' style={{borderRadius:'2em', backgroundColor:'#415A77', zIndex: 1, backgroundImage: `url(${formValues.image && formValues.image.src})`,backgroundSize: 'cover',backgroundPosition: 'center',backgroundRepeat: 'no-repeat' }}>
-        
+      
+        <div  className='car_block' style={{borderRadius:'2em', backgroundColor:'#415A77', zIndex: 2, backgroundImage: `url(${formValues.image && formValues.image.src})`,backgroundSize: 'cover',backgroundPosition: 'center',backgroundRepeat: 'no-repeat' }}>
+        <div className='contacs' style={{borderRadius:'2em', backgroundColor:'#415A77',zIndex: 1}}>
+      <Typography variant="h5" gutterBottom style={{ textAlign: "justify", marginLeft:"3%" ,marginTop:"2%" }} >
+        Name: {users.firstName}
+      </Typography>
+      <Typography variant="h5" gutterBottom style={{ textAlign: "justify" ,marginLeft:"3%"  }}>
+       Surname:{users.lastName}
+      </Typography>
+      <Typography variant="h5" gutterBottom style={{ textAlign: "justify" ,marginLeft:"3%"  }}>
+       Phone:{users.phone}
+      </Typography>
+      <Typography variant="h5" gutterBottom style={{ textAlign: "justify" ,marginLeft:"3%"  }}>
+       Email:{users.email}
+      </Typography>
+      </div>
           <div  className='car_block2' style={{borderRadius:'2em', backgroundColor:'#415A77', zIndex: 0}}>
             <Typography variant="h3" gutterBottom style={{  textAlign: "center", marginTop:"2%"}} >{formValues.BrandName} {formValues.ModelName}</Typography>  
             <Typography variant="h4" gutterBottom style={{ textAlign: "center" }} > Description</Typography>
             <Typography variant="h5" gutterBottom style={{ textAlign: "justify" }} > {formValues.description}</Typography>
             <Typography variant="h5" gutterBottom style={{ textAlign: "justify" }} > Condition : {formValues.condition}  Year : {formValues.year} Mileage : {formValues.mileage}  </Typography>
           </div>
+
+         
+
         </div>
-      </div>
     </>
   );
 };

@@ -10,7 +10,7 @@ const validationSchema = Yup.object().shape({
     .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
     .required("Required"),
   ModelName: Yup.string()
-  .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
+  .matches(/^[a-zA-Z0-9]+$/, "Special characters are not available")
   .required("Required"),
   year: Yup.number()
     .required("Required")
@@ -28,9 +28,12 @@ const validationSchema = Yup.object().shape({
     base64: Yup.string()
     .notOneOf(["Nope", "No"], "Invalid base64 value")
     .required("Required")
+  
 
 
 });
+
+
 
 
 
@@ -195,7 +198,7 @@ const [image, setImage] = useState(null);
           Description
       </Typography></label>
           <Field as='textarea' rows='5' name="description"
-              className="form-control form-control-lg spasing-field "  />
+              className="form-control form-control-lg spasing-field "   />
           <ErrorMessage
             name="description"
             className="d-block invalid-feedback"

@@ -11,6 +11,9 @@ let userSchema = new Schema({
   email: {
     type: String
   },
+  phone:{
+    type: Number
+  },
   password:{
     type: String
   },
