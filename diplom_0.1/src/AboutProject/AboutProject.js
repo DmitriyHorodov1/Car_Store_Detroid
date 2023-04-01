@@ -1,86 +1,75 @@
 import React, {Component, useState} from 'react';
 import "./AboutProject.css"
-import { Modal, Button } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Particles from "react-tsparticles";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
 
 
 function AboutProject() {
+  return (
+    <>
+    <div style={{marginTop:"13%"}}>
+      <Card sx={{ maxWidth: 345, marginLeft: '30em', position: 'absolute' }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://thumbs.dreamstime.com/b/lego-minifigure-head-parts-ninjago-lego-minifigure-head-parts-100654313.jpg"
+            alt="green iguana"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+            Meet Dmytro - Passionate Web Developer and Programmer
+            </Typography>
+            <Typography variant="body3" color="text.secondary">
+              Hi there! My name is Dmytro, and I'm a 21-year-old programmer currently studying to become a web developer. I have a passion for creating innovative and user-friendly websites that help solve real-world problems.
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
 
+      <Card sx={{ maxWidth: 345, marginLeft: '53em', position: 'absolute' }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://www.ionos.ca/digitalguide/fileadmin/DigitalGuide/Teaser/code-editoren-t.jpg"
+            alt="green iguana"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+            The Technology Behind My Diploma Project Website
+            </Typography>
+            <Typography variant="body3" color="text.secondary">
+            I recently built a website for my diploma project using React, Express.js, and MongoDB. These technologies allowed me to create a powerful and dynamic web application that provides a seamless user experience.
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
 
-    
-
-    return (
-        <>
-
-        <h4 class = 'text'>
-        About
-        <span>About</span>
-        <span>About</span>
-        <span>Me and my project</span>
-        </h4>
-
-
-
-            <ul class="cards">
-  <li>
-    <a className="card"  style={{borderRadius:'10%', backgroundColor:'#E0E1DD' }}>
-      <img src="https://mma.prnewswire.com/media/1015261/FCA_Dodge_Powers_Past_Goal.jpg" class="card__image" alt="" />
-      <div className="card__overlay">
-        <div className="card__header">
-          <svg className="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                     
-          
-          <div className="card__header-text">
-            <h3 className="card__title">What the topic of web_site?</h3>            
-            <span className="card__status">1 hour ago</span>
-          </div>
-        </div>
-        <p className="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
+      <Card sx={{ maxWidth: 345, marginLeft: '76em', position: 'relative' }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://hips.hearstapps.com/hmg-prod/images/2023-ford-gt-mk-iv-02-1670543667.jpg?crop=0.736xw:0.655xh;0.223xw,0.157xh&resize=640:*"
+            alt="green iguana"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+            Cars: A Lifelong Fascination and the Inspiration for My Diploma Project
+            </Typography>
+            <Typography variant="body3" color="text.secondary">
+            Since I was a child, I've always been fascinated by cars. From their design to their mechanics, there's something captivating about them. So, when it came time to choose a theme for my diploma project, I knew I wanted to build a website focused on cars. I created a platform for buying and selling cars that provides a simple and efficient way for users to connect with one another.
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
       </div>
-    </a>      
-  </li>
-  <li>
-    <a  className="card" style={{borderRadius:'10%', backgroundColor:'#E0E1DD'}}>
-      <img src="https://storage.googleapis.com/production-justhost-v1-0-3/623/387623/tB7mfWuO/fc7e907b6cae44d7aa9ed2bd6ea01cb9" class="card__image" alt="" />
-      <div className="card__overlay">        
-        <div className="card__header">
-          <svg className="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                 
-         
-          <div className="card__header-text">
-            <h3 className="card__title">How am I ?</h3>
-            <span className="card__status">3 hours ago</span>
-          </div>
-        </div>
-        <p className="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
-      </div>
-    </a>
-  </li>
-  <li>
-  <a  className="card"  style={{borderRadius:'10%', backgroundColor:'#E0E1DD'}}>
-      <img src="https://img.freepik.com/free-vector/glitch-error-404-page_23-2148105404.jpg" class="card__image" alt="" />
-      <div className="card__overlay">
-        <div className="card__header">
-          <svg className="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                     
-          
-          <div className="card__header-text">
-            <h3 className="card__title">Find bug ?</h3>            
-            <span className="card__status">сontact me</span>
-          </div>
-        </div>
-        <p className="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
-      </div>
-    </a> 
-  </li>
-    
-</ul>
-
-
-
-        </>
-
-
-    );
-
+    </>
+  );
 }
 
 export default AboutProject;

@@ -3,7 +3,7 @@ import axios from "axios";
 import './CarInfo.css'
 import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography';
-
+import Avatar from '@mui/material/Avatar';
 
 const CarInfo = (props) => {
 
@@ -93,11 +93,9 @@ const CarInfo = (props) => {
       
         <div  className='car_block' style={{borderRadius:'2em', backgroundColor:'#415A77', zIndex: 2, backgroundImage: `url(${formValues.image && formValues.image.src})`,backgroundSize: 'cover',backgroundPosition: 'center',backgroundRepeat: 'no-repeat' }}>
         <div className='contacs' style={{borderRadius:'2em', backgroundColor:'#415A77',zIndex: 1}}>
-      <Typography variant="h5" gutterBottom style={{ textAlign: "justify", marginLeft:"3%" ,marginTop:"2%" }} >
-        Name: {users.firstName}
-      </Typography>
-      <Typography variant="h5" gutterBottom style={{ textAlign: "justify" ,marginLeft:"3%"  }}>
-       Surname:{users.lastName}
+       <img src = "https://cdn-icons-png.flaticon.com/256/3128/3128526.png"  style={{marginLeft:"15%"}}  ></img>
+      <Typography variant="h5" gutterBottom style={{ textAlign: "center", marginLeft:"3%" ,   marginTop:"3%" }} >
+         {users.firstName} {users.lastName}
       </Typography>
       <Typography variant="h5" gutterBottom style={{ textAlign: "justify" ,marginLeft:"3%"  }}>
        Phone:{users.phone}

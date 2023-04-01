@@ -2,7 +2,7 @@ import React, {Component,useState, useEffect} from 'react';
 import "./App.css"
 import {Routes, Route , Link, useParams} from "react-router-dom";
 import HomePage from "./HomePage/HomePage";
-import AboutProject from "./AboutProject/AboutProject";
+import AboutProject from "./AboutProject/AboutProject"
 import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -33,6 +33,7 @@ import Button from '@mui/material/Button';
 import LogInUser from './Users/LogInPage/LogInUser';
 import CreateUser from './Users/SignUpPage/CreateUserPage';
 import PasswordRecoveryPage from './Users/PassWord/PasswordRecoveryPage';
+import UserCarList from './UserCarList/UserCarList';
 import axios from 'axios';
 
 
@@ -197,7 +198,7 @@ export default function App() {
                 <Route path = "/log-in" element={<LogInUser/>}/>
                 <Route path = "/sign-up" element={<CreateUser/>}/>
                 <Route path = "/pass-rec" element={<PasswordRecoveryPage/>}/>
-                
+                <Route path = "/user-cars" element={<UserCarList/>}/>
                 
             </Routes>
 
@@ -232,11 +233,15 @@ export default function App() {
                                 aria-label="vertical outlined button group"
                               
                             >
-                                <Link to="/" ><button key="home" className='a2'>Home</button></Link>,
-                                <Link to="/car-list"><button key="car-list" className='a2'>CarList</button></Link>,
-                                <Link to="/about" ><button key="about" className='a2'>About</button></Link>,
+                                <Link to="/" ><button key="home" className='a2' style={{marginBottom:'8%'}} >Home</button></Link>
+                                <Link to="/car-list"><button key="car-list" className='a2' style={{marginBottom:'8%'}}>All cars</button></Link>
+                                {email && (  <Link to="/user-cars" ><button key="user-cars" className='a2'style={{marginBottom:'8%'}} >Your cars</button></Link>)}
+                                {email && (  <Link to="/create-car" ><button key="create-car" className='a2' style={{marginBottom:'8%'}}>Crete page</button></Link>)}
+                                <Link to="/about" ><button key="about" className='a2' style={{marginBottom:'8%'}} >About</button></Link>
                               
-                                {email && (  <Link to="/create-car" ><button key="create-car" className='a2'>CretePage</button></Link>)}
+                                
+                            
+                                
                             </ButtonGroup>
 
                         </ListItem>
@@ -253,16 +258,16 @@ export default function App() {
       <div className="container">
         <div className="row">
           <div className="col-md-8 col-sm-6 col-xs-12">
-            <p className="copyright-text">Copyright &copy; 2022 All Rights Reserved by 
+            <p className="copyright-text">Copyright &copy; 2023 All Rights Reserved by 
          <a href="#">Detroit</a>.
             </p>
           </div>
 
           <div className="col-md-4 col-sm-6 col-xs-12" >
              
-           <GitHubIcon fontSize="large"  style={{marginRight: "2%" }} ></GitHubIcon>
-           <InstagramIcon fontSize='large'  style={{marginRight: "2%" }} ></InstagramIcon>
-           <YouTubeIcon  fontSize='large' style={{marginRight: "2%" }}  ></YouTubeIcon>
+           <GitHubIcon fontSize="large"  style={{marginRight: "5%" }} ></GitHubIcon>
+           <InstagramIcon fontSize='large'  style={{marginRight: "5%" }} ></InstagramIcon>
+           <YouTubeIcon  fontSize='large' style={{marginRight: "5%" }}  ></YouTubeIcon>
            <TelegramIcon fontSize='large'></TelegramIcon>
              
           </div>

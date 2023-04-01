@@ -11,8 +11,6 @@ import Select from '@mui/material/Select';
 import { MenuItem } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import CarTableRow from "../CarTableRow/CarTableRow";
-
-
 import "./carList.css"  
 const CarList = () => {
 

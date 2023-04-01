@@ -10,7 +10,7 @@ export default function HomePage() {
     
 
     return (
-         <body className="bgblur"  style={{background: '#778DA9' }} >
+         <div className="bgblur main"  style={{background: '#778DA9' }} >
         <h4 class = 'text'>
         Detroit
         <span>Detroit</span>
@@ -23,63 +23,63 @@ export default function HomePage() {
       </Typography>
 
 
-       <div class="general-container">
-       <input class="radio" type="radio" name="card" id="card-1" />
-  <label  class="content" for="card-1">
-    <span class="icon">
+       <div className="general-container">
+       <input className="radio" type="radio" name="card" id="card-1"  />
+  <label  className="content" for="card-1">
+    <span className="icon">
       <NoCrashIcon></NoCrashIcon>
     </span>
-    <h3 class="card-title">
+    <h3 className="card-title">
       <Link to="/car-list"> Ford Bronco 2021 </Link>
       
-      <span class="subtitle"></span>
+      <span className="subtitle"></span>
     </h3>
   </label>
-  <input class="radio" type="radio" name="card" id="card-2" />
-  <label class="content" for="card-2">
-    <span class="icon">
+  <input className="radio" type="radio" name="card" id="card-2" checked />
+  <label className="content" for="card-2">
+    <span className="icon">
     <NoCrashIcon></NoCrashIcon>
     </span>
-    <h3 class="card-title">
+    <h3 className="card-title">
     <Link to="/car-list"> Bentley Continental Gt 2012 </Link>
-      <span class="subtitle"></span>
+      <span className="subtitle"></span>
     </h3>
   </label>
-  <input class="radio" type="radio" name="card" id="card-3" />
-  <label class="content" for="card-3">
-    <span class="icon">
+  <input className="radio" type="radio" name="card" id="card-3" />
+  <label className="content" for="card-3">
+    <span className="icon">
     <NoCrashIcon></NoCrashIcon>
     </span>
-    <h3 class="card-title">
+    <h3 className="card-title">
     <Link to="/car-list"> Hyundai Vehicle i20 2019 </Link>
-      <span class="subtitle"></span>
+      <span className="subtitle"></span>
     </h3>
   </label>
-  <input class="radio" type="radio" name="card" id="card-4" />
-  <label class="content" for="card-4">
-    <span class="icon">
+  <input className="radio" type="radio" name="card" id="card-4" />
+  <label className="content" for="card-4">
+    <span className="icon">
     <NoCrashIcon></NoCrashIcon>
     </span>
-    <h3 class="card-title">
+    <h3 className="card-title">
     <Link to="/car-list">   Nissan GTR R34 1999</Link>
      
-      <span class="subtitle"></span>
+      <span className="subtitle"></span>
     </h3>
   </label>
-  <input class="radio" type="radio" name="card" id="card-5" />
-  <label class="content" for="card-5">
-    <span class="icon">
+  <input className="radio" type="radio" name="card" id="card-5" />
+  <label className="content" for="card-5">
+    <span className="icon">
     <NoCrashIcon></NoCrashIcon>
     </span>
-    <h3 class="card-title">
+    <h3 className="card-title">
     <Link to="/car-list">  BMW M4 2019</Link>
      
-      <span class="subtitle"></span>
+      <span className="subtitle"></span>
     </h3>
   </label>
 </div>
 
-         </body>
+         </div>
       
 
       

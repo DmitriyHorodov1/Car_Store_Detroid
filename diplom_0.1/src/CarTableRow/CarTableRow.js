@@ -7,6 +7,7 @@ import './CarTableRow.css'
 const CarTableRow = (props) => {
   const { _id, BrandName, ModelName, year, mileage, condition, price, description, base64 } = props.obj;
   const [imageSrc, setImageSrc] = useState(null);
+  const { isUserCar } = props;
 
   const deleteCar = () => {
     axios
@@ -44,6 +45,39 @@ const CarTableRow = (props) => {
 
   return (
     <>
+      <div class="cartoshka">
+        <div class="wrapper">
+          <div class="banner-image" style={{ backgroundImage: `url(${imageSrc})` }}></div>
+          <h1>
+            {BrandName} {ModelName}
+          </h1>
+          <p>
+            Year {year} <br />
+            Price {price} Miles {mileage}
+          </p>
+        </div>
+        <div class="button-wrapper">
+          <Link to={`/car-info/${_id}`} class="btn outline">
+            DETAILS
+          </Link>
+          {isUserCar && (
+            <Button variant="danger" onClick={deleteCar}>
+              Delete
+            </Button>
+          )}
+          {isUserCar&&(
+             <Link to={`/update-car/${_id}`} class="btn fill" style={{marginTop:"2%"}} >
+             EDIT
+           </Link>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default CarTableRow;
+/* <>
       <div className="card" style={{borderRadius:'10%',  backgroundImage: `url(${imageSrc})`,backgroundSize: 'cover',backgroundPosition: 'center',backgroundRepeat: 'no-repeat'}}>
 	  
         <div className="background">
@@ -57,8 +91,4 @@ const CarTableRow = (props) => {
         </div>
        
       </div>
-    </>
-  );
-};
-
-export default CarTableRow;
+    </>*/

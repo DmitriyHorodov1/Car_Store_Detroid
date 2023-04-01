@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Typography from '@mui/material/Typography';
-import { FormGroup, FormControl, Button } from "react-bootstrap";
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+import Link from '@mui/material/Link';
+import { FormGroup, FormControl, } from "react-bootstrap";
+import Button from "@mui/material/Button";
 import "./CarForm.css"
 const CarForm = (props) => {
 const validationSchema = Yup.object().shape({
@@ -60,164 +64,265 @@ const [image, setImage] = useState(null);
     });
   };
   
+  
+  const currencies2 = [
+    {
+      value: ' ',
+      label: 'Select a condition',
+    },
+    {
+      value: 'New',
+      label: 'New',
+    },
+    {
+      value: 'Used',
+      label: 'Used',
+    }
+  ];
 
   return (
     <>
-           
-    <div className="form-wrapper spasing-form ">
+    <body>
+   
+<div className=" forma  " style={{ 
+  backgroundColor:'#E0E1DD',
+  width:"40em",
+  padding:"5em",
+  borderRadius:'20px',
 
-      <Formik {...props} validationSchema={validationSchema}  >
-        
-        <Form  >
-          <FormGroup>
-            <label htmlFor="exampleFormControlTextarea1" > 
-            <Typography variant="h4" gutterBottom>Brand name</Typography>
-            </label>
-            <Field name="BrandName" type="text" 
-                className="form-control form-control-lg spasing-field " />
-                
-            <ErrorMessage
-              name="BrandName"
-              className="d-block invalid-feedback"
-              component="span"
-              style={{fontSize:'1.5em'}}
-            />
-          </FormGroup>
-          <FormGroup>
-            <label htmlFor="exampleFormControlTextarea1" > 
-            <Typography variant="h4" gutterBottom>Model name</Typography>
-            </label>
-            <Field name="ModelName" type="text" 
-                className="form-control form-control-lg spasing-field " />
-            <ErrorMessage
-              name="ModelName"
-              className="d-block invalid-feedback"
-              component="span"
-              style={{fontSize:'1.5em'}}
-            />
-          </FormGroup>
+
+}}>
+
+<Formik {...props} validationSchema={validationSchema} >
+        {({ values, handleChange, handleBlur }) => (
+          <Form>
+            <FormGroup>
+            <Typography variant="h5" gutterBottom  style={{textAlign:"center"}}>
+  Create Car 
+  </Typography>
+              <TextField
+               label="Brand Name"
+                id="BrandName"
+                name="BrandName"
+                type="text"
+                value={values.BrandName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                variant="outlined"
+                fullWidth
+                margin="normal"
+              />
+              <ErrorMessage
+                name="BrandName"
+                className="d-block invalid-feedback"
+                component="span"
+                style={{ fontSize: '1.2em' }}
+              />
+            </FormGroup>
+            <FormGroup>
+              
+              <TextField
+              label="Model Name"
+                id="ModelName"
+                name="ModelName"
+                type="text"
+                value={values.ModelName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                variant="outlined"
+                fullWidth
+                margin="normal"
+              />
+              <ErrorMessage
+                name="ModelName"
+                className="d-block invalid-feedback"
+                component="span"
+                style={{ fontSize: '1.2em' }}
+              />
+            </FormGroup>
+            <FormGroup>
+              
+              <TextField
+              label="     "
+                id="phone"
+                type="file"
+                 name="photo" 
+                value={values.photo}
+                onChange={(event) => handleFileInputChange(event)}
+                onBlur={handleBlur}
+                variant="outlined"
+                fullWidth
+                margin="normal"
+              />
+              <ErrorMessage
+                name="photo"
+                className="d-block invalid-feedback"
+                component="span"
+                style={{ fontSize: '1.2em' }}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              
+            <TextField
+          id="base64"
+          name="base64"
+          select
+          label="Do you want save photo ?"
+          defaultValue="Nope"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          variant="outlined"
+          fullWidth
+          margin="normal"
           
-          <FormGroup>
-            <label htmlFor="exampleFormControlTextarea1" > 
-            <Typography variant="h4" gutterBottom>Photo</Typography>
-            </label>
-            <Field  type="file" name="photo" 
-                className="form-control form-control-lg spasing-field "  accept="image/jpg" onChange={(event) => handleFileInputChange(event)}
-                 />
-            <ErrorMessage
-              name="photo"
-              className="d-block invalid-feedback"
-              component="span"
-              style={{fontSize:'1.5em'}}
-            />
-          </FormGroup>
-
-
-
-          <FormGroup>
-          <label htmlFor="exampleFormControlTextarea1" > 
-            <Typography variant="h4" gutterBottom>Do you want save photo ?</Typography>
-            </label>
-            <Field as="select"  name="base64" 
-                className="form-control form-control-lg spasing-field "  >
-                  <option value = "Nope"> Pick your answer</option>
-                   <option value={base64String}>Yes</option>
-                   <option value="No">No</option>
-                  </Field>
-                  <ErrorMessage
-              name="base64"
-              className="d-block invalid-feedback"
-              component="span"
-              style={{fontSize:'1.5em'}}
-            />
-          </FormGroup>
-
-
-          
-              <FormGroup>
-          <label htmlFor="exampleFormControlTextarea1" ><Typography variant="h4" gutterBottom>
-        Year
-      </Typography></label>
-          <Field name="year" type="year" 
-                className="form-control form-control-lg spasing-field "  />
-          <ErrorMessage
-            name="year"
-            className="d-block invalid-feedback"
-            component="span"
-            style={{fontSize:'1.5em'}}
-          />
-        </FormGroup>
+        >
+          <MenuItem value="Nope">
+          <em>Pick your answer !</em>
+        </MenuItem>
+        <MenuItem value="No">No</MenuItem>
+        <MenuItem value={base64String}>Yes</MenuItem>
         
-                <FormGroup>
-          <label htmlFor="exampleFormControlTextarea1" ><Typography variant="h4" gutterBottom>
-        Mileage
-      </Typography></label>
-          <Field name="mileage" type="number" 
-              className="form-control form-control-lg spasing-field "  />
-          <ErrorMessage
-            name="mileage"
-            className="d-block invalid-feedback"
-            component="span"
-            style={{fontSize:'1.5em'}}
-          />
-        </FormGroup>
+        </TextField>
+              <ErrorMessage
+                name="base64"
+                className="d-block invalid-feedback"
+                component="span"
+                style={{ fontSize: '1.2em' }}
+              />
+            </FormGroup>
 
-                <FormGroup>
-          <label htmlFor="exampleFormControlTextarea1" ><Typography variant="h4" gutterBottom>
-        Condition
-      </Typography></label>
-          <Field as="select" name="condition" className="form-control form-control-lg spasing-field">
-            <option value="">Select a condition</option>
-            <option value="new">New</option>
-            <option value="used">Used</option>
-          </Field>
-          <ErrorMessage
+            <FormGroup>
+              
+              <TextField
+              label="Year"
+                id="year"
+                name="year"
+                type="text"
+                value={values.year}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                variant="outlined"
+                fullWidth
+                margin="normal"
+              />
+              <ErrorMessage
+                name="year"
+                className="d-block invalid-feedback"
+                component="span"
+                style={{ fontSize: '1.2em' }}
+              />
+            </FormGroup>
+            <FormGroup>
+              
+              <TextField
+              label="Mileage"
+                id="mileage"
+                name="mileage"
+                type="number"
+                value={values.mileage}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                variant="outlined"
+                fullWidth
+                margin="normal"
+              />
+              <ErrorMessage
+                name="mileage"
+                className="d-block invalid-feedback"
+                component="span"
+                style={{ fontSize: '1.2em' }}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              
+              <TextField
+            id="condition"
             name="condition"
-            className="d-block invalid-feedback"
-            component="span"
-            style={{fontSize:'1.5em'}}
-          />
-        </FormGroup>
-
-                <FormGroup>
-          <label htmlFor="exampleFormControlTextarea1" ><Typography variant="h4" gutterBottom>
-        Price
-      </Typography></label>
-          <Field name="price" type="number" 
-              className="form-control form-control-lg spasing-field "  />
-          <ErrorMessage
-            name="price"
-            className="d-block invalid-feedback"
-            component="span"
-            style={{fontSize:'1.5em'}}
-          />
-        </FormGroup>
-
-                <FormGroup>
-          <label htmlFor="exampleFormControlTextarea1" ><Typography variant="h4" gutterBottom>
-          Description
-      </Typography></label>
-          <Field as='textarea' rows='5' name="description"
-              className="form-control form-control-lg spasing-field "   />
-          <ErrorMessage
-            name="description"
-            className="d-block invalid-feedback"
-            component="span"
-            style={{fontSize:'1.5em'}}
-          />
-        </FormGroup>
-        <Button variant="danger" size="lg" 
-            block="block" type="submit">
-            {props.children}
+            select
+            label="Condition"
+            defaultValue=" "
+            onChange={handleChange}
+            onBlur={handleBlur}
+            variant="outlined"
+            fullWidth
+            margin="normal"
             
-          </Button>
-        </Form>
+          >
+            {currencies2.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+                <ErrorMessage
+                  name="condition"
+                  className="d-block invalid-feedback"
+                  component="span"
+                  style={{ fontSize: '1.2em' }}
+                />
+              </FormGroup>
+
+
+              <FormGroup>
+              
+              <TextField
+              label="Price"
+                id="price"
+                name="price"
+                type="number"
+                value={values.price}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                variant="outlined"
+                fullWidth
+                margin="normal"
+              />
+              <ErrorMessage
+                name="price"
+                className="d-block invalid-feedback"
+                component="span"
+                style={{ fontSize: '1.2em' }}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              
+              <TextField
+              label="Description"
+                id="description"
+                name="description"
+                type="text"
+                multiline
+                maxRows={15}
+                value={values.description}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                variant="outlined"
+                fullWidth
+                margin="normal"
+              />
+              <ErrorMessage
+                name="description"
+                className="d-block invalid-feedback"
+                component="span"
+                style={{ fontSize: '1.2em' }}
+              />
+            </FormGroup>
+
+
+            <Button variant="contained" type="submit" style={{marginLeft:"35%", marginTop:"3%", width:"10em", height:"4em"}}>
+              {props.children}
+            </Button>
+          </Form>
+        )}
       </Formik>
-    </div>
-    </>
-    
+      
+</div>
+</body>
+</>
   );
-  
 };
 
 export default CarForm;
