@@ -17,7 +17,7 @@ const validationSchema = Yup.object().shape({
   
   .required("Required"),
   password: Yup.string()
-  .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
+  .matches(/^[a-zA-Z0-9]+$/, "Special characters are not available")
   .required("Required"),
 
 });

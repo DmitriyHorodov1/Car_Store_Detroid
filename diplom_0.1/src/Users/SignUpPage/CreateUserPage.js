@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // CreateCar Component
 const CreateUser = () => {
   let navigate = useNavigate();
-  const [formValues, setFormValues] = useState({ firstName:'', lastName:'', email:'', password:'' })
+  const [formValues, setFormValues] = useState({ firstName:'', lastName:'', email:'', role:'' ,password:'' })
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -24,6 +24,15 @@ const CreateUser = () => {
     if (emailExists) {
       alert('This email is already registered');
     } else {
+      if (userObject.role === 'Admin') {
+        const pin = prompt('Please enter the Admin pin code:');
+        if (pin === '839564') {
+          userObject.pin = pin;
+        } else {
+          alert('Invalid pin code');
+          return;
+        }
+      }
       axios.post('http://localhost:4000/cars/sign-up', userObject)
         .then(res => {
           if (res.status === 200){
@@ -36,6 +45,7 @@ const CreateUser = () => {
         .catch(err => alert('Something went wrong'))
     }
   }
+  
 
   return (
     <SignUpPage initialValues={formValues} onSubmit={onSubmit} enableReinitialize>

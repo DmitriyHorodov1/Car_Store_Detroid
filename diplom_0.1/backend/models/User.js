@@ -11,6 +11,9 @@ let userSchema = new Schema({
   email: {
     type: String
   },
+  role:{
+    type: String
+  },
   phone:{
     type: Number
   },

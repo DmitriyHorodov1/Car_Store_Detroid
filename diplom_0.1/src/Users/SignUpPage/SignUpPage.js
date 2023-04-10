@@ -8,7 +8,7 @@ import './SignUpPage.css'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
-
+import MenuItem from '@mui/material/MenuItem';
 const SignUpPage = (props) => {
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -19,11 +19,12 @@ const SignUpPage = (props) => {
       .required("Required"),
     email: Yup.string()
       .required("Required"),
+      role: Yup.string().required("Requied"),
     phone: Yup.string()
       .matches(/^\d{10}$/, "Invalid phone number")
       .required("Required"),
     password: Yup.string()
-      .matches(/^[a-zA-Z]+$/, "Only letters are allowed")
+    .matches(/^[a-zA-Z0-9]+$/, "Special characters are not available")
       .required("Required")
   });
   
@@ -37,6 +38,7 @@ console.log(props);
     <div className=" formBack  " style={{ 
       backgroundColor:'#E0E1DD',
       width:"40em",
+      height:"50em",
       padding:"5em",
       borderRadius:'20px'
     
@@ -132,6 +134,34 @@ console.log(props);
                     style={{ fontSize: '1.2em' }}
                   />
                 </FormGroup>
+
+                <FormGroup>
+              
+              <TextField
+            id="role"
+            name="role"
+            select
+            label="Role"
+            defaultValue="User"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            
+          >
+           
+          <MenuItem value="User">User</MenuItem>
+          <MenuItem value="Admin">Admin</MenuItem>
+          
+          </TextField>
+                <ErrorMessage
+                  name="role"
+                  className="d-block invalid-feedback"
+                  component="span"
+                  style={{ fontSize: '1.2em' }}
+                />
+              </FormGroup>
 
                 <FormGroup>
                   
