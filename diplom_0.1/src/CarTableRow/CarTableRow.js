@@ -2,10 +2,20 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import './CarTableRow.css'
+import "./CarTableRow.css";
 
 const CarTableRow = (props) => {
-  const { _id, BrandName, ModelName, year, mileage, condition, price, description, base64 } = props.obj;
+  const {
+    _id,
+    BrandName,
+    ModelName,
+    year,
+    mileage,
+    condition,
+    price,
+    description,
+    base64,
+  } = props.obj;
   const [imageSrc, setImageSrc] = useState(null);
   const { isUserCar } = props;
 
@@ -47,7 +57,10 @@ const CarTableRow = (props) => {
     <>
       <div class="cartoshka">
         <div class="wrapper">
-          <div class="banner-image" style={{ backgroundImage: `url(${imageSrc})` }}></div>
+          <div
+            class="banner-image"
+            style={{ backgroundImage: `url(${imageSrc})` }}
+          ></div>
           <h1>
             {BrandName} {ModelName}
           </h1>
@@ -65,10 +78,14 @@ const CarTableRow = (props) => {
               Delete
             </Button>
           )}
-          {isUserCar&&(
-             <Link to={`/update-car/${_id}`} class="btn fill" style={{marginTop:"2%"}} >
-             EDIT
-           </Link>
+          {isUserCar && (
+            <Link
+              to={`/update-car/${_id}`}
+              class="btn fill"
+              style={{ marginTop: "2%" }}
+            >
+              EDIT
+            </Link>
           )}
         </div>
       </div>
