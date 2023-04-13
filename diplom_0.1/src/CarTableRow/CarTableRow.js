@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./CarTableRow.css";
-
+import Typography from "@mui/material/Typography";
 const CarTableRow = (props) => {
   const {
     _id,
@@ -16,8 +16,36 @@ const CarTableRow = (props) => {
     description,
     base64,
   } = props.obj;
+  const [email, setEmail] = useState("");
   const [imageSrc, setImageSrc] = useState(null);
   const { isUserCar } = props;
+ 
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const loggedInEmail = localStorage.getItem("loggedInEmail");
+    if (loggedInEmail) {
+      setEmail(loggedInEmail);
+    }
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/cars/users")
+      .then((response) => {
+        setUsers(response.data);
+        const adminUser = response.data.find(
+          (user) => user.email === email && user.role === "Admin"
+        );
+        if (adminUser) {
+          setIsAdmin(true);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [email]);
 
   const deleteCar = () => {
     axios
@@ -55,6 +83,7 @@ const CarTableRow = (props) => {
 
   return (
     <>
+      
       <div class="cartoshka">
         <div class="wrapper">
           <div
@@ -73,20 +102,20 @@ const CarTableRow = (props) => {
           <Link to={`/car-info/${_id}`} class="btn outline">
             DETAILS
           </Link>
-          {isUserCar && (
-            <Button variant="danger" onClick={deleteCar}>
-              Delete
-            </Button>
-          )}
-          {isUserCar && (
-            <Link
-              to={`/update-car/${_id}`}
-              class="btn fill"
-              style={{ marginTop: "2%" }}
-            >
-              EDIT
-            </Link>
-          )}
+          {isAdmin || isUserCar ? (
+            <>
+              <Button variant="danger" onClick={deleteCar}>
+                Delete
+              </Button>
+              <Link
+                to={`/update-car/${_id}`}
+                className="btn fill"
+                style={{ marginTop: "2%" }}
+              >
+                Edit
+              </Link>
+            </>
+          ) : null}
         </div>
       </div>
     </>
@@ -94,18 +123,3 @@ const CarTableRow = (props) => {
 };
 
 export default CarTableRow;
-/* <>
-      <div className="card" style={{borderRadius:'10%',  backgroundImage: `url(${imageSrc})`,backgroundSize: 'cover',backgroundPosition: 'center',backgroundRepeat: 'no-repeat'}}>
-	  
-        <div className="background">
-          <Button onClick={deleteCar} size="sm" variant="danger">Delete</Button>
-          <Link className="edit-link" to={`/update-car/${_id}`}>Edit</Link>
-          <Link to={`/car-info/${_id}`}>Info</Link>
-          <ul className="font-size">
-            <li>{BrandName} {ModelName} Year {year}</li>
-            <li>Price {price} Miles {mileage}</li>
-          </ul>
-        </div>
-       
-      </div>
-    </>*/

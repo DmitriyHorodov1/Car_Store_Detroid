@@ -3,7 +3,7 @@ import "./App.css";
 import { Routes, Route, Link, useParams } from "react-router-dom";
 import HomePage from "./HomePage/HomePage";
 import AboutProject from "./AboutProject/AboutProject";
-import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -18,7 +18,6 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import { styled, useTheme, alpha } from "@mui/material/styles";
-import { InputBase } from "@mui/material";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import CreatePage from "./CreatePage/CreatePage";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -34,8 +33,9 @@ import LogInUser from "./Users/LogInPage/LogInUser";
 import CreateUser from "./Users/SignUpPage/CreateUserPage";
 import PasswordRecoveryPage from "./Users/PassWord/PasswordRecoveryPage";
 import UserCarList from "./UserCarList/UserCarList";
+import AdminPanelPage from "./Users/AdminPanel/AdminPanelPage";
 import axios from "axios";
-import { boolean } from "yup";
+import EditUser from "./Users/EditUser/EditUser";
 
 const themeOne = createTheme({
   palette: {
@@ -96,6 +96,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function App() {
+  let navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = useState("");
@@ -156,6 +157,7 @@ export default function App() {
             .then(() => {
               alert("Logout successful");
               localStorage.removeItem("loggedInEmail");
+              navigate("/");
               window.location.reload();
             })
             .catch((error) => {
@@ -228,14 +230,25 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutProject />} />
-            <Route path="/create-car" element={<CreatePage />} />
-            <Route path="/update-car/:id" element={<EditCar />} />
+            {isUser && <Route path="/create-car" element={<CreatePage />} />}
+            {isUser || isAdmin ? (
+              <Route path="/update-car/:id" element={<EditCar />} />
+            ) : null}
+            {isAdmin && (
+              <Route path="/update-user/:id" element={<EditUser />} />
+            )}
             <Route path="/car-list" element={<CarList />} />
             <Route path="/car-info/:id" element={<CarInfo />} />
             <Route path="/log-in" element={<LogInUser />} />
             <Route path="/sign-up" element={<CreateUser />} />
             <Route path="/pass-rec" element={<PasswordRecoveryPage />} />
             <Route path="/user-cars" element={<UserCarList />} />
+            {isAdmin && (
+              <Route path="/user-cars/:emailadmin" element={<UserCarList />} />
+            )}
+            {isAdmin && (
+              <Route path="/admin-panel" element={<AdminPanelPage />} />
+            )}
           </Routes>
 
           <Drawer
